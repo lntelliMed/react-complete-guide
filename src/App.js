@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
-import UserInput from './UserInput/UserInput';
-import UserOutput from './UserOutput/UserOutput';
+// import UserInput from './UserInput/UserInput';
+// import UserOutput from './UserOutput/UserOutput';
 
 class App extends Component {
   state = {
     persons: [
-      { name: 'John', age: 25 },
-      { name: 'Mike', age: 28 },
-      { name: 'Hana', age:29}
+      { id: 'a1', name: 'John', age: 25 },
+      { id: 'a2', name: 'Mike', age: 28 },
+      { id: 'a3', name: 'Hana', age:29}
     ],
     username: 'SuperUser',
     showPersons: false
@@ -44,6 +44,13 @@ class App extends Component {
     this.setState({ showPersons: ! this.state.showPersons });
   }
 
+  deletePersonHandler = (personIndex) => {
+    // const persons = this.state.persons.slice();
+    const persons = [...this.state.persons];
+    persons.splice(personIndex, 1)
+    this.setState({ persons:  persons });
+  }
+
   render() {
     const style = {
       backgroundColor: 'whilte',
@@ -56,10 +63,12 @@ class App extends Component {
     let persons = null;
     if(this.state.showPersons){
       persons = (<div>
-                  {this.state.persons.map(person => {
+                  {this.state.persons.map((person, index) => {
                     return <Person
+                      click={() => this.deletePersonHandler(index)}
                       name={person.name}
-                      age={person.age} />
+                      age={person.age}
+                      key={person.id} />
                   })}
                 </div>
                 );
@@ -74,8 +83,8 @@ class App extends Component {
 
           {persons}
 
-          <hr />
-          <h3>New Tasks</h3>
+          {/* <hr /> */}
+          {/* <h3>New Tasks</h3>
           <ol>
             <li>Create TWO new components: UserInput and UserOutput</li>
             <li>UserInput should hold an input element, UserOutput two paragraphs</li>
@@ -93,7 +102,7 @@ class App extends Component {
             currentName={this.state.username} />
           <UserOutput userName={this.state.username} />
           <UserOutput userName={this.state.username} />
-          <UserOutput userName="Josh" />
+          <UserOutput userName="Josh" /> */}
       </div>
     );
   }
