@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import ValidationComponent from './ValidationComponent/ValidationComponent';
+import CharComponent from './CharComponent/CharComponent';
 // import UserInput from './UserInput/UserInput';
 // import UserOutput from './UserOutput/UserOutput';
 
@@ -12,11 +14,11 @@ class App extends Component {
       { id: 'a3', name: 'Hana', age:29}
     ],
     username: 'SuperUser',
-    showPersons: false
+    showPersons: false,
+    enteredText: ''
   }
 
   switchNameHandler = (newName) => {
-    // console.log('clicked')
     this.setState({
       persons: [
         { name: newName, age: 25 },
@@ -52,14 +54,31 @@ class App extends Component {
     this.setState({ persons:  persons });
   }
 
+  textLengthHandler(event){
+    this.setState({
+      enteredText: event.target.value
+    });
+  }
+
+  deleteCharHandler = (event, charIndex) => {
+    const originalText = this.state.enteredText;
+    let charArr = originalText.split('');
+    charArr.splice(charIndex, 1);
+    this.setState({
+      enteredText: charArr.join('')
+    });
+
+  }
+
   render() {
     const style = {
-      backgroundColor: 'whilte',
+      backgroundColor: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
       cursor: 'pointer'
     };
+    const enteredChars = this.state.enteredText.split('');
 
     let persons = null;
     if(this.state.showPersons){
@@ -86,7 +105,18 @@ class App extends Component {
 
           {persons}
 
-          {/* <hr /> */}
+          <hr />
+        Enter Text: <input type="text" onChange={(event) => this.textLengthHandler(event)} value={this.state.enteredText}/>
+        <br />
+        Entered Text Length: <p>{this.state.enteredText.length}</p>
+        <ValidationComponent enteredTextLength={this.state.enteredText.length} />
+          {enteredChars.map((c, index) =>
+          {
+            return (<CharComponent key={index} enteredChar={c} deleteCharHandler={(event) => {
+               this.deleteCharHandler(event, index);
+            }} />)
+
+          })}
           {/* <h3>New Tasks</h3>
           <ol>
             <li>Create TWO new components: UserInput and UserOutput</li>
