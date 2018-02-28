@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
-import ValidationComponent from './ValidationComponent/ValidationComponent';
-import CharComponent from './CharComponent/CharComponent';
+import Validation from './Validation/Validation';
+import Char from './Char/Char';
 // import UserInput from './UserInput/UserInput';
 // import UserOutput from './UserOutput/UserOutput';
 
@@ -15,7 +15,7 @@ class App extends Component {
     ],
     username: 'SuperUser',
     showPersons: false,
-    enteredText: ''
+    userInput: ''
   }
 
   switchNameHandler = (newName) => {
@@ -54,20 +54,30 @@ class App extends Component {
     this.setState({ persons:  persons });
   }
 
-  textLengthHandler(event){
-    this.setState({
-      enteredText: event.target.value
-    });
+  // textLengthHandler(event){
+  //   this.setState({
+  //     enteredText: event.target.value
+  //   });
+  // }
+
+  // deleteCharHandler = (event, charIndex) => {
+  //   const originalText = this.state.enteredText;
+  //   let charArr = originalText.split('');
+  //   charArr.splice(charIndex, 1);
+  //   this.setState({
+  //     enteredText: charArr.join('')
+  //   });
+  // }
+
+  inputChangedHandler = (event) => {
+    this.setState({ userInput: event.target.value });
   }
 
-  deleteCharHandler = (event, charIndex) => {
-    const originalText = this.state.enteredText;
-    let charArr = originalText.split('');
-    charArr.splice(charIndex, 1);
-    this.setState({
-      enteredText: charArr.join('')
-    });
-
+  deleteCharHandler = (index) => {
+    const text = this.state.userInput.split('');
+    text.splice(index, 1);
+    const updatedText = text.join('');
+    this.setState({ userInput: updatedText });
   }
 
   render() {
@@ -78,7 +88,13 @@ class App extends Component {
       padding: '8px',
       cursor: 'pointer'
     };
-    const enteredChars = this.state.enteredText.split('');
+    // const enteredChars = this.state.enteredText.split('');
+    const charList = this.state.userInput.split('').map((ch, index) => {
+      return <Char
+        character={ch}
+        key={index}
+        clicked={() => this.deleteCharHandler(index)} />;
+    });
 
     let persons = null;
     if(this.state.showPersons){
@@ -106,7 +122,7 @@ class App extends Component {
           {persons}
 
           <hr />
-        Enter Text: <input type="text" onChange={(event) => this.textLengthHandler(event)} value={this.state.enteredText}/>
+        {/* Enter Text: <input type="text" onChange={(event) => this.textLengthHandler(event)} value={this.state.enteredText}/>
         <br />
         Entered Text Length: <p>{this.state.enteredText.length}</p>
         <ValidationComponent enteredTextLength={this.state.enteredText.length} />
@@ -116,7 +132,27 @@ class App extends Component {
                this.deleteCharHandler(event, index);
             }} />)
 
-          })}
+          })} */}
+
+          {/* <ol>
+            <li>Create an input field (in App component) with a change listener which outputs the length of the entered text below it (e.g. in a paragraph).</li>
+            <li>Create a new component (=> ValidationComponent) which receives the text length as a prop</li>
+            <li>Inside the ValidationComponent, either output "Text too short" or "Text long enough" depending on the text length (e.g. take 5 as a minimum length)</li>
+            <li>Create another component (=> CharComponent) and style it as an inline box (=> display: inline-block, padding: 16px, text-align: center, margin: 16px, border: 1px solid black).</li>
+            <li>Render a list of CharComponents where each CharComponent receives a different letter of the entered text (in the initial input field) as a prop.</li>
+            <li>When you click a CharComponent, it should be removed from the entered text.</li>
+          </ol>
+          <p>Hint: Keep in mind that JavaScript strings are basically arrays!</p> */}
+
+          <input
+            type="text"
+            onChange={this.inputChangedHandler}
+            value={this.state.userInput} />
+          <p>{this.state.userInput}</p>
+          <Validation inputLength={this.state.userInput.length} />
+          {charList}
+
+
           {/* <h3>New Tasks</h3>
           <ol>
             <li>Create TWO new components: UserInput and UserOutput</li>
