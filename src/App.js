@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
-import Radium, {StyleRoot } from 'radium';
+import classes from './App.css';
 import Person from './Person/Person';
 import Validation from './Validation/Validation';
 import Char from './Char/Char';
@@ -88,11 +87,7 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
+      cursor: 'pointer'
     };
     // const enteredChars = this.state.enteredText.split('');
     const charList = this.state.userInput.split('').map((ch, index) => {
@@ -117,27 +112,22 @@ class App extends Component {
                 </div>
                 );
       style.backgroundColor = 'red';
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
     }
 
-    const classes = [];
+    const assignedClasses = [];
 
     if (this.state.persons.length <= 2){
-      classes.push('red');
+      assignedClasses.push(classes.red);
     }
 
     if (this.state.persons.length <= 1) {
-      classes.push('bold');
+      assignedClasses.push(classes.bold);
     }
 
     return (
-      <StyleRoot>
-        <div className="App">
+        <div className={classes.App}>
           <h1>Hello, there from React!</h1>
-          <p className={classes.join(' ')} >Below is the list of people:</p>
+          <p className={assignedClasses.join(' ')} >Below is the list of people:</p>
           <button
             style={style}
             onClick={this.togglePersonsHandler}>Toggle Persons</button>
@@ -196,9 +186,8 @@ class App extends Component {
             <UserOutput userName={this.state.username} />
             <UserOutput userName="Josh" /> */}
         </div>
-      </StyleRoot>
     );
   }
 }
 
-export default Radium(App);
+export default App;
