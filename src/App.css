@@ -6,3 +6,11 @@
 li {
     list-style-type: none;
 }
+
+.red {
+  color: red;
+}
+
+.bold {
+  font-weight: bold;
+}
