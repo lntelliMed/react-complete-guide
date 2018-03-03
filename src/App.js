@@ -3,6 +3,7 @@ import classes from './App.css';
 import Person from './Person/Person';
 import Validation from './Validation/Validation';
 import Char from './Char/Char';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 // import UserInput from './UserInput/UserInput';
 // import UserOutput from './UserOutput/UserOutput';
 
@@ -94,13 +95,14 @@ class App extends Component {
     if(this.state.showPersons){
       persons = (<div>
                   {this.state.persons.map((person, index) => {
-                    return <Person
-                      click={() => this.deletePersonHandler(index)}
-                      name={person.name}
-                      age={person.age}
-                      key={person.id}
-                      changed={(event) => { this.nameChangedHandler(event, person.id) }}
-                      />
+                  return <ErrorBoundary key={person.id}>
+                          <Person
+                            click={() => this.deletePersonHandler(index)}
+                            name={person.name}
+                            age={person.age}
+                            changed={(event) => { this.nameChangedHandler(event, person.id) }}
+                          />
+                        </ErrorBoundary>
                   })}
                 </div>
                 );
