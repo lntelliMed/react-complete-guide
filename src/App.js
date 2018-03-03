@@ -81,14 +81,6 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-    };
     // const enteredChars = this.state.enteredText.split('');
     const charList = this.state.userInput.split('').map((ch, index) => {
       return <Char
@@ -98,6 +90,7 @@ class App extends Component {
     });
 
     let persons = null;
+    let btnClass = '';
     if(this.state.showPersons){
       persons = (<div>
                   {this.state.persons.map((person, index) => {
@@ -111,7 +104,7 @@ class App extends Component {
                   })}
                 </div>
                 );
-      style.backgroundColor = 'red';
+      btnClass = classes.Red;
     }
 
     const assignedClasses = [];
@@ -129,7 +122,7 @@ class App extends Component {
           <h1>Hello, there from React!</h1>
           <p className={assignedClasses.join(' ')} >Below is the list of people:</p>
           <button
-            style={style}
+            className={btnClass}
             onClick={this.togglePersonsHandler}>Toggle Persons</button>
 
             {persons}
