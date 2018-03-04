@@ -6,15 +6,27 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
-  state = {
-    persons: [
-      { id: 'a1', name: 'John', age: 25 },
-      { id: 'a2', name: 'Mike', age: 28 },
-      { id: 'a3', name: 'Hana', age:29}
-    ],
-    username: 'SuperUser',
-    showPersons: false,
-    userInput: ''
+  constructor(props){
+    super(props);
+    console.log('[App.js] Inside Constructor', props);
+    this.state = {
+      persons: [
+        { id: 'a1', name: 'John', age: 25 },
+        { id: 'a2', name: 'Mike', age: 28 },
+        { id: 'a3', name: 'Hana', age: 29 }
+      ],
+      username: 'SuperUser',
+      showPersons: false,
+      userInput: ''
+    }
+  }
+
+  componentWillMount(){
+    console.log('[App.js] Inside componentWillMount()');
+  }
+
+  componentDidMount() {
+    console.log('[App.js] Inside componentDidMount()');
   }
 
   switchNameHandler = (newName) => {
@@ -64,6 +76,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('[App.js] Inside render()');
     const charList = this.state.userInput.split('').map((ch, index) => {
       return <Char
         character={ch}
