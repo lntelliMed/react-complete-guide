@@ -4,7 +4,8 @@ import Validation from '../components/Validation/Validation';
 import Char from '../components/Char/Char';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
-import WithClass from '../hoc/WithClass';
+import withClass from '../hoc/withClass';
+import Aux from '../hoc/Aux';
 
 class App extends PureComponent {
   constructor(props){
@@ -109,7 +110,7 @@ class App extends PureComponent {
     }
 
     return (
-        <WithClass classes={classes.App}>
+        <Aux>
             <button onClick={()=> {
               this.setState({showPersons: true})
             }}>Show Persons</button>
@@ -127,9 +128,9 @@ class App extends PureComponent {
             <p>{this.state.userInput}</p>
             <Validation inputLength={this.state.userInput.length} />
             {charList}
-        </WithClass>
+        </Aux>
     );
   }
 }
 
-export default App;
+export default withClass(App, classes.App);
