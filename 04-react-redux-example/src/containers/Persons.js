@@ -51,11 +51,13 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddPerson: () => {
+        onAddPerson: (name, age) => {
             const newPerson = {
                 id: Math.random(), // not really unique but good enough here!
-                name: 'Joe' + Math.floor(Math.random() * 20),
-                age: Math.floor(Math.random() * 25)
+                // name: 'Joe' + Math.floor(Math.random() * 20),
+                // age: Math.floor(Math.random() * 25)
+                name,
+                age
             }
             dispatch({
                 type: actionTypes.ADD_PERSON,
