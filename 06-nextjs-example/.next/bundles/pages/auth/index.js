@@ -1,0 +1,6 @@
+
+          window.__NEXT_REGISTER_PAGE('/auth', function() {
+            var comp = module.exports=webpackJsonp([3],{200:function(e,t,n){e.exports=n(201)},201:function(e,t,n){"use strict";function a(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(t,"__esModule",{value:!0});var u=n(15),l=a(u),r=n(6),c=a(r),d=n(202),o=a(d),s=function(e){return c.default.createElement("div",null,c.default.createElement("h1",null,"The Auth Index Page - ",e.appName),c.default.createElement(o.default,{name:"Joe",age:29}))};s.getInitialProps=function(e){return new l.default(function(e,t){setTimeout(function(){e({appName:"Super App (Auth)"})},1e3)})},t.default=s},202:function(e,t,n){"use strict";function a(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(t,"__esModule",{value:!0});var u=n(203),l=a(u),r=n(6),c=a(r),d=function(e){return c.default.createElement("div",{className:"jsx-2876080547"},c.default.createElement("h1",{className:"jsx-2876080547"},e.name),c.default.createElement("p",{className:"jsx-2876080547"},"Age: ",e.age),c.default.createElement(l.default,{styleId:"2876080547",css:["div.jsx-2876080547{border:1px solid #eee;box-shadow:0 2p 3px #ccc;padding:20px;text-align:center;}"]}))};t.default=d},203:function(e,t,n){e.exports=n(102)}},[200]);
+            return { page: comp.default }
+          })
+        
