@@ -11,6 +11,36 @@
 //   }
 // });
 
+
+const getCustomer = (id) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        id: 1,
+        name: 'Test User',
+        isGold: true,
+        email: 'email@test.com'
+      });
+    }, 4000);
+  });
+};
+
+const getTopMovies = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(['movie1', 'movie2']);
+    }, 4000);
+  });
+};
+
+const sendEmail = (email, movies) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, 4000);
+  });
+};
+
 async function notifyCustomer() {
   const customer = await getCustomer(1);
   console.log('Customer: ', customer);
@@ -21,34 +51,5 @@ async function notifyCustomer() {
     console.log('Email sent...');
   }
 }
+
 notifyCustomer();
-
-
-function getCustomer(id) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({ 
-        id: 1, 
-        name: 'Mosh Hamedani', 
-        isGold: true, 
-        email: 'email' 
-      });
-    }, 4000);  
-  });
-}
-
-function getTopMovies() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(['movie1', 'movie2']);
-    }, 4000);
-  });
-}
-
-function sendEmail(email, movies) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve();
-    }, 4000);
-  });
-}
