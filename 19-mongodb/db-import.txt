@@ -1,0 +1,1 @@
+mongoimport --db mongo-courses --collection courses --drop --file db-data.json --jsonArray
